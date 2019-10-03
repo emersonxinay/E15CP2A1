@@ -1,10 +1,20 @@
 class HistoriesController < ApplicationController
   before_action :set_history, only: [:show, :edit, :update, :destroy]
-
+  before_action :authenticate_user!, excpt: [:show, :index]
   # GET /histories
   # GET /histories.json
   def index
     @histories = History.all
+  end
+
+  def mystories
+    @histories = History.where(:user_id => current_user.id)
+  end
+
+  def mystories_user
+    @temp_user = User.find_by_username(params[:username])
+    @histories = History.where(:user_id => @temp_user.id)
+
   end
 
   # GET /histories/1
