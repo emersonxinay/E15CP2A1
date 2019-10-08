@@ -7,7 +7,7 @@
             <%= image_tag(@history.picture_url, style: "max-width: 100%; border-radius: 10px;") if @history.picture? %>
           </div>
           <br>
-          <p><strong><%= link_to @history.user.name, mystories_user_path(@history.user.name) %></strong></p>
+          <p><strong><%= @history.user.name  %></strong></p>
         </div>
         <div class="col-md-2"></div>
       </div>

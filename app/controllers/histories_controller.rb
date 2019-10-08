@@ -12,8 +12,8 @@ class HistoriesController < ApplicationController
   end
 
   def mystories_user
-    @temp_user = User.find_by_username(params[:username])
-    @histories = History.where(:user_id => @temp_user.id)
+    @temp_user = current_user
+    @histories =  current_user.histories
 
   end
 
@@ -35,6 +35,7 @@ class HistoriesController < ApplicationController
   # POST /histories.json
   def create
     @history = History.new(history_params)
+    @history.user = current_user
 
     respond_to do |format|
       if @history.save
